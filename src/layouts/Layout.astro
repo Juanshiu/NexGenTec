@@ -1,0 +1,37 @@
+---
+interface Props {
+	title: string;
+	description?: string;
+	class?: string;
+}
+
+const { title, description, class: className } = Astro.props;
+import '@fontsource-variable/onest';
+import { ViewTransitions } from 'astro:transitions';
+import '../pages/globals.css';
+import Header from "@components/layout/Header.astro";
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description}>
+		<meta name="theme-color" content="#202020">
+		<title>{title}</title>
+		<ViewTransitions />
+	</head>
+	<body class="flex flex-col h-full w-full dark:bg-zinc-900 bg-zinc-50 dark:text-zinc-100">
+		<Header />
+		<slot />
+	</body>
+</html>
+<style is:global>
+	html {
+		font-family: 'Onest Variable', sans-serif;
+		scroll-behavior: smooth;
+	}
+</style>
