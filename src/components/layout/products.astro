@@ -1,0 +1,26 @@
+---
+import { supabase } from "../../lib/supabase";
+import type Products from "@interface/productos";
+
+let { data, error } = await supabase
+    .from('productos')
+    .select('*')
+
+let productos: Products[] = data || []
+
+console.log(productos)
+---
+
+
+<div>
+    <h1>Productos</h1>
+    <ul>
+        {
+        productos?.map((producto) => (
+            <li>{producto.nombre_producto}</li>
+            <li>{producto.descripcion}</li>
+            <li>{producto.precio}</li>
+            <li>{producto.stock}</li>
+        ))}
+    </ul>
+</div>
