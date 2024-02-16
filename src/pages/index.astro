@@ -1,18 +1,67 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
+import Section from '@components/Section.astro';
+import Prodcutos from '@components/layout/products.astro';
 
 ---
 
 <Layout title="Welcome to Astro." description='Hola'>
-	<main>
-		<h1>Welcome to Astro</hjson>
-		<p>
-			Welcome to your new Astro site! This is the home page. You can edit this file at <code>src/pages/index.astro</code>.
-		</p>
+	<main class="">
+
+		<Section>
+			
+			<article class=" w-1/4 flex flex-col">
+				<button class=" w-full text-left rounded-md p-2 hover:bg-black/5 transition-all">Computadores</button>
+				<button class=" w-full text-left rounded-md p-2 hover:bg-black/5 transition-all">Portátiles</button>
+				<button class=" w-full text-left rounded-md p-2 hover:bg-black/5 transition-all">Perifericos</button>
+				<button class=" w-full text-left rounded-md p-2 hover:bg-black/5 transition-all">Telefonos</button>
+				<button class=" w-full text-left rounded-md p-2 hover:bg-black/5 transition-all">Consolas</button>
+				<button class=" w-full text-left rounded-md p-2 hover:bg-black/5 transition-all">Decoraciones</button>
+			</article>
+
+			<article class="banner w-1/2 rounded">
+				<div class=" p-12">
+					<h1 class=" font-bold text-2xl mb-4">Lo último en computadoras</h1>
+					<a href="" class=" bg-white text-black font-bold rounded-md p-2">Leer más</a>
+				</div>
+			</article>
+			
+			<article class=" w-1/4 flex flex-col gap-3">
+				<div class=" px-2 py-3 bg-black/5 rounded-md">
+					<div class=" flex items-center gap-2">
+						<picture>
+							<img src="https://www.asofiduciarias.org.co/wp-content/uploads/2018/06/sin-foto.png" class=" size-12 rounded-full" alt="">
+						</picture>
+						<div class=" flex flex-col">
+							<span>Hola usuario</span>
+							<span>Ya te registraste?</span>	
+						</div>
+					</div>
+					<div class=" flex flex-col mt-2 gap-2">
+						<a href="/register" class=" text-center bg-black/10 rounded-md hover:scale-105 transition-transform">Registrate aquí</a>
+						<a href="/signin" class=" text-center bg-black text-white rounded-md hover:scale-105 transition-transform"> Inicia Sesión</a>
+					</div>
+				</div>
+
+				<div class=" px-2 py-4 text-lg bg-orange-400 rounded-md text-white">
+					<span>Obten cupones de $5 para fundas</span>
+				</div>
+
+				<div class=" px-2 py-4 text-lg bg-violet-400 rounded-md text-white">
+					<span>Ofertas desde el 50% de descuento</span>
+				</div>
+			</article>
+		</Section>
+
+		<Section>
+			<Prodcutos />
+		</Section>
+
 	</main>
 </Layout>
 
 <style>
-
+	.banner {
+		background: url('img/banner1.webp') no-repeat center / cover;
+	}
 </style>
