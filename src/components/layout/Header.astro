@@ -1,10 +1,14 @@
 ---
 import DropdownMenu from '@components/layout/dropmenu'
+import Logo from '@components/icons/logo.astro'
 ---
-<nav class="border-b bg-white">
+<nav class="border-b bg-white ">
 
   <div class=" flex items-center justify-between p-4 max-w-screen-xl mx-auto">
-    <a href="/" class=" flex items-center font-semibold text-stone-950 gap-2"><img src="icons/logo.svg" width="50px" alt=""> NexGenTec</a>
+    <a href="/" class=" flex items-center font-semibold text-stone-950 gap-2">
+      <Logo class=" size-10"></Logo>
+      NexGenTec
+    </a>
 
     <label for="" class=" flex">
       <input id="search" type="search" class=" py-2 px-4 bg-zinc-50 border border-black focus:border-blue-500 rounded-l-md focus:outline-none  focus:bg-white focus:ring-opacity-60">
@@ -13,7 +17,7 @@ import DropdownMenu from '@components/layout/dropmenu'
     </label>
 
     <div>
-      <ul class="font-medium flex items-baseline gap-8">
+      <ul class=" font-medium flex items-baseline gap-8">
         <li>
           <a href="/dashboard" class="block text-stone-950">Perfil</a>
         </li>
@@ -23,7 +27,29 @@ import DropdownMenu from '@components/layout/dropmenu'
         <li>
           <a href="/signin" class="block text-stone-950">Iniciar Sesión</a>
         </li>
+        <li>
+          <button class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 w-10 rounded-full">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="h-4 w-4"
+            >
+              <circle cx="8" cy="21" r="1"></circle>
+              <circle cx="19" cy="21" r="1"></circle>
+              <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+            </svg>
+            <span class="sr-only">Toggle cart</span>
+          </button>
+        </li>
       </ul>
+      
     </div>
 
   </div>
