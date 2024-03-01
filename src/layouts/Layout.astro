@@ -10,6 +10,7 @@ import '@fontsource-variable/onest';
 import { ViewTransitions } from 'astro:transitions';
 import '../pages/globals.css';
 import Header from "@components/layout/Header.astro";
+import Footer from "@components/layout/Footer.astro";
 ---
 
 <!doctype html>
@@ -17,16 +18,18 @@ import Header from "@components/layout/Header.astro";
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href="logo.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description}>
 		<meta name="theme-color" content="#202020">
+    
 		<title>{title}</title>
 		<ViewTransitions />
 	</head>
 	<body class="flex flex-col h-full w-full bg-blue-50/30">
 		<Header />
 		<slot />
+		<Footer />
 	</body>
 </html>
 <style is:global>

@@ -1,14 +1,63 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Section from '@components/Section.astro';
-import Prodcutos from '@components/layout/products.astro';
-
+import ProductsHero from '@components/layout/products_hero.astro';
 ---
 
-<Layout title="Welcome to Astro." description='Hola'>
-	<main class="">
+<Layout title="NexGenTec" description='Bienvenidos a nuestra tienda virtual, aquí podrás encontrar todo tipo de componentes para tu pc y entre otros producto tecnológicos.'>
+	<main class="flex flex-col gap-4">
 
-		<Section>
+		<section class="relative">
+			<video
+			src="video/banner1.mp4"
+			width="1440"
+			height="320"
+			class=" aspect-video w-full h-[50rem] object-cover"
+			loop
+			autoplay
+			muted
+			/>
+			<div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center gap-4 text-sm md:text-base text-white animate-fade-up animate-duration-1000 animate-ease-in-out ">
+				<h1 class="animate-charcter font-semibold text-8xl ">Descubre aquí todo lo que necesitas de tecnología</h1>
+				<a href="" class="italic underline text-3xl transition-all hover:scale-110 ">Descubre aquí</a>
+			</div>
+		</section>
+
+		<section class="container grid gap-4 px-4 md:grid-cols-2 md:gap-8 lg:px-6 xl:grid-cols-4">
+			<a
+			class="flex flex-col items-center p-4 text-center rounded-lg border hover:shadow-md transition-all dark:hover:shadow-md animate-fade-up animate-duration-[1100ms] animate-ease-out animate-delay-200"
+			href="#">
+				<img src="Laptop.svg" alt="" width="35px">
+				<span class="mt-2 text-sm font-medium">Laptops</span>
+			</a>
+
+			<a
+			class="flex flex-col items-center p-4 text-center rounded-lg border hover:shadow-md transition-all dark:hover:shadow-md animate-fade-up animate-duration-[1100ms] animate-ease-out animate-delay-[400ms]"
+			href="#"
+			>
+				<img src="Desktop.svg" alt="" width="35px">
+				<span class="mt-2 text-sm font-medium">Desktops</span>
+			</a>
+
+			<a
+			class="flex flex-col items-center p-4 text-center rounded-lg border hover:shadow-md transition-all dark:hover:shadow-md animate-fade-up animate-duration-[1100ms] animate-ease-out animate-delay-[600ms]"
+			href="#"
+			>
+				<img src="Components.svg" alt="" width="35px">
+				<span class="mt-2 text-sm font-medium">Components</span>
+			</a>
+			
+			<a
+			class="flex flex-col items-center p-4 text-center rounded-lg border hover:shadow-md transition-all dark:hover:shadow-md animate-fade-up animate-duration-[1100ms] animate-ease-out animate-delay-[800ms]"
+			href="#"
+			>
+				<img src="Accesorios.svg" alt="" width="35px">
+				<span class="mt-2 text-sm font-medium">Accessories</span>
+			</a>
+		</section>
+		<ProductsHero/>
+
+		<!-- <Section class="p-5 gap-4">
 			
 			<article class=" w-1/4 flex flex-col">
 				<button class=" w-full text-left rounded-md p-2 hover:bg-black/5 transition-all">Computadores</button>
@@ -38,8 +87,8 @@ import Prodcutos from '@components/layout/products.astro';
 						</div>
 					</div>
 					<div class=" flex flex-col mt-2 gap-2">
-						<a href="/register" class=" text-center bg-black/10 rounded-md hover:scale-105 transition-transform">Registrate aquí</a>
-						<a href="/signin" class=" text-center bg-black text-white rounded-md hover:scale-105 transition-transform"> Inicia Sesión</a>
+						<a href="/register" class=" text-center py-1 bg-black/10 rounded-md hover:scale-105 transition-transform">Registrate aquí</a>
+						<a href="/signin" class=" text-center py-1 bg-black text-white rounded-md hover:scale-105 transition-transform"> Inicia Sesión</a>
 					</div>
 				</div>
 
@@ -53,15 +102,34 @@ import Prodcutos from '@components/layout/products.astro';
 			</article>
 		</Section>
 
-		<Section>
+		<Section class="">
 			<Prodcutos />
-		</Section>
+		</Section> -->
 
 	</main>
 </Layout>
 
 <style>
-	.banner {
-		background: url('img/banner1.webp') no-repeat center / cover;
+	.animate-charcter {
+		background-image: linear-gradient(
+			-25deg,
+			#fff800 0%,
+			#7c0c9e 29%,
+			#ff1361 67%,
+			#fff800 100%
+		);
+		background-size: 200% auto;
+		color: #fff;
+		text-decoration: transparent;
+		background-clip: text;
+		-webkit-text-fill-color: transparent;
+		animation: textclip 5s ease-in infinite;
+	}
+
+	@keyframes textclip {
+		to {
+			background-position: 200% center;
+		}
 	}
 </style>
+
