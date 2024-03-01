@@ -10,8 +10,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.4.1",
-    "@astrojs/react": "^3.0.9",
+    "@astrojs/check": "^0.5.5",
+    "@astrojs/react": "^3.0.10",
     "@astrojs/tailwind": "^5.1.0",
     "@fontsource-variable/onest": "^5.0.2",
     "@radix-ui/react-dropdown-menu": "^2.0.6",
@@ -19,16 +19,14 @@
     "@supabase/supabase-js": "^2.39.3",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.18",
-    "astro": "^4.3.3",
+    "astro": "^4.4.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
-    "flowbite": "^2.3.0",
     "lucide-react": "^0.323.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailwind-merge": "^2.2.1",
     "tailwindcss": "^3.4.1",
-    "tailwindcss-animate": "^1.0.7",
     "tailwindcss-animated": "^1.0.1",
     "typescript": "^5.3.3"
   }
