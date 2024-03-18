@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Section from '@components/Section.astro';
 import ProductsHero from '@components/layout/products_hero.astro';
+
 ---
 
 <Layout title="NexGenTec" description='Bienvenidos a nuestra tienda virtual, aquí podrás encontrar todo tipo de componentes para tu pc y entre otros producto tecnológicos.'>
@@ -23,17 +24,17 @@ import ProductsHero from '@components/layout/products_hero.astro';
 			</div>
 		</section>
 
-		<section class="container grid gap-4 px-4 md:grid-cols-2 md:gap-8 lg:px-6 xl:grid-cols-4">
+		<section class="categories container grid gap-4 px-4 my-12 md:grid-cols-2 md:gap-8 lg:px-6 xl:grid-cols-4">
 			<a
-			class="flex flex-col items-center p-4 text-center rounded-lg border hover:shadow-md transition-all dark:hover:shadow-md animate-fade-up animate-duration-[1100ms] animate-ease-out animate-delay-200"
-			href="#">
+			class="flex flex-col items-center p-4 text-center rounded-lg border hover:shadow-md transition-all dark:hover:shadow-md animate-fade-up animate-duration-[1100ms] animate-ease-out animate-delay-200 "
+			href="">
 				<img src="Laptop.svg" alt="" width="35px">
 				<span class="mt-2 text-sm font-medium">Laptops</span>
 			</a>
 
 			<a
 			class="flex flex-col items-center p-4 text-center rounded-lg border hover:shadow-md transition-all dark:hover:shadow-md animate-fade-up animate-duration-[1100ms] animate-ease-out animate-delay-[400ms]"
-			href="#"
+			href="./Escritorio.astro"
 			>
 				<img src="Desktop.svg" alt="" width="35px">
 				<span class="mt-2 text-sm font-medium">Desktops</span>
@@ -55,7 +56,10 @@ import ProductsHero from '@components/layout/products_hero.astro';
 				<span class="mt-2 text-sm font-medium">Accessories</span>
 			</a>
 		</section>
-		<ProductsHero/>
+
+		<section class=" container grid gap-6 px-4 py-6 md:grid-cols-2 md:gap-10 lg:px-6 xl:grid-cols-3 ">
+			<ProductsHero/>
+		</section>
 
 		<!-- <Section class="p-5 gap-4">
 			
@@ -132,4 +136,3 @@ import ProductsHero from '@components/layout/products_hero.astro';
 		}
 	}
 </style>
-
