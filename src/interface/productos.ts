@@ -8,4 +8,5 @@ export default interface Products {
   precio: number;
   stock: number;
   slug: string;
+  img_producto: string;
 }
