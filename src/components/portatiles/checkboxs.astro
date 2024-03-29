@@ -1,0 +1,56 @@
+---
+interface CheckboxProps {
+    text: string;
+    value: string;
+    id: string;
+}
+
+interface Props {
+    title: string;
+    checkboxes: CheckboxProps[];
+}
+
+
+const { title, checkboxes } = Astro.props;
+---
+
+<div class=" py-2">
+    <details>
+        <summary class="flex justify-between">{title}<img src="more.svg" width="20px" alt=""><img src="less.svg" width="20px" alt=""></summary>
+        <div class="flex flex-col">
+            {checkboxes.map((checkbox) => (
+                <label>
+                    <input type="checkbox" name={checkbox.value} id={checkbox.id} />
+                    <span>{checkbox.text}</span>
+                </label>
+            ))}
+        </div>
+    </details>
+</div>
+<hr>
+
+<style>
+    details[open] summary img:nth-child(1) {
+        transform: rotate(180deg);
+        display: none;
+    }
+
+    details summary img:nth-child(2) {
+        display: none;
+    }
+
+    details[open] summary img:nth-child(2) {
+        display: block ;
+    }
+
+    @keyframes details-show {
+    from {
+            opacity:0;
+            transform: var(--details-translate, translateY(-0.5em));
+        }
+    }
+
+    details[open] > *:not(summary) {
+        animation: details-show 150ms ease-in-out;
+    }
+</style>
