@@ -9,4 +9,7 @@ export default interface Products {
   stock: number;
   slug: string;
   img_producto: string;
+  id_categoria: {
+    nombre_categoria: string;
+  }
 }

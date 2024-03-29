@@ -1,5 +1,5 @@
 ---
-import { supabase } from "../../lib/supabase";
+import { supabase } from "@lib/supabase";
 import type Products from "@interface/productos";
 
 let { data, error } = await supabase
@@ -14,10 +14,13 @@ let { data, error } = await supabase
         precio,
         img_producto,
         slug`)
+    .range(0, 8)
+
+    if (error) {
+        console.log(error)
+    }
 
 let Productos: Products[] = data || []
-
-console.log(Productos)
 
 // const productosConImagenes = await Promise.all(Productos.map(async (producto) => {
 //     const { data } = await supabase.storage
@@ -42,6 +45,7 @@ console.log(Productos)
             />
             <div class="flex flex-col gap-1.5">
                 <h3 class="font-semibold">{producto.nombre_producto}</h3>
+                <h3 class="font-semibold">{producto.id_marca.nombre_marca}</h3>
                 <span class="text-sm text-gray-500 truncate">{producto.descripcion}</span>
                 <p class="font-semibold">${producto.precio}</p>
                 <button class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all bg-black text-white h-9 rounded-md px-3 hover:scale-105 hover:shadow-2xl">
