@@ -7,7 +7,6 @@ interface Props {
 
 const { title, description, class: className } = Astro.props;
 import '@fontsource-variable/onest';
-import { ViewTransitions } from 'astro:transitions';
 import Header from "@components/layout/Header.astro";
 import Footer from "@components/layout/Footer.astro";
 ---
@@ -23,7 +22,6 @@ import Footer from "@components/layout/Footer.astro";
 		<meta name="theme-color" content="#202020">
     
 		<title>{title}</title>
-		<ViewTransitions />
 	</head>
 	<body class="flex flex-col h-full w-full bg-blue-50/30">
 		<Header />
