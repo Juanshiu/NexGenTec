@@ -1,0 +1,72 @@
+---
+import Section from "@components/Section.astro";
+import Carrito from "@components/icons/Carrito.astro";
+import Layout from "@layouts/Layout.astro";
+---
+<Layout title="NexGenTec">
+  <Section>
+    <article>
+        <h1><Carrito/>Carrito de compra <span>(Descuento: 0%)</span></h1>
+        <hr>
+        <table>
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Subtotal</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Producto 1</td>
+                    <td>1</td>
+                    <td>$100.00</td>
+                    <td>$100.00</td>
+                    <td><button>Eliminar</button></td>
+                </tr>
+                <tr>
+                    <td>Producto 2</td>
+                    <td>2</td>
+                    <td>$200.00</td>
+                    <td>$400.00</td>
+                    <td><button>Eliminar</button></td>
+                </tr>
+                <tr>
+                    <td>Producto 3</td>
+                    <td>3</td>
+                    <td>$300.00</td>
+                    <td>$900.00</td>
+                    <td><button>Eliminar</button></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">Total</td>
+                    <td>$1400.00</td>
+                    <td><button>Comprar</button></td>
+                </tr>
+            </tfoot>
+        </table>
+    </article>
+
+    <article>
+        <h1><img src="list.svg" alt="">Resumen de la compra</h1>
+        <hr>
+        <span>1 Producto(s) en el Carro de Compras</span>
+        <div>
+            <span>Total</span>
+            <span>$1400.00</span>
+        </div>
+        <div>
+            <span><img src="lock.svg" alt="" class=" size-8">Tu información es segura</span>
+            <p>No venderemos ni alquilaremos su información de contacto personal con fines de marketing.</p>
+        </div>
+        <div>
+            <span><img src="safe.svg" alt="" class=" size-8">Pago seguro</span>
+            <p>Toda la información se cifra y se transmite sin riesgo mediante un protocolo de capa de conexión segura SSL.</p>
+        </div>
+    </article>
+  </Section>
+</Layout>

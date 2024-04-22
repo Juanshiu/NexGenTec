@@ -44,7 +44,7 @@ let { data, error } = await supabase
         descripcion,
         precio,
         img_producto`)
-    .eq('id_categoria', 1)
+    .eq('id_categoria', 2)
 
     if (error) {
         console.log(error)
@@ -52,6 +52,8 @@ let { data, error } = await supabase
 
 let Productos: Products[] = data || []
 let numeroDeProductos = Productos.length
+
+
 ---
 
 <Layout title='Laptops'>
