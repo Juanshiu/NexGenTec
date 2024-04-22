@@ -1,3 +1,4 @@
+
 export default interface Products {
   id_productos: number;
   nombre_producto: string;
@@ -7,7 +8,6 @@ export default interface Products {
   descripcion: string;
   precio: number;
   stock: number;
-  slug: string;
   img_producto: string;
   id_categoria: {
     nombre_categoria: string;
