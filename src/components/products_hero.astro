@@ -1,6 +1,7 @@
 ---
 import { supabase } from "@lib/supabase";
 import type Products from "@interface/productos";
+import FormattUrl from "./FormattUrl.astro";
 
 let { data, error } = await supabase
     .from('Productos')
@@ -12,8 +13,7 @@ let { data, error } = await supabase
         ),
         descripcion,
         precio,
-        img_producto,
-        url`)
+        img_producto`)
     .range(0, 8)
 
     if (error) {
@@ -21,40 +21,28 @@ let { data, error } = await supabase
     }
 
 let Productos: Products[] = data || []
-
-// const productosConImagenes = await Promise.all(Productos.map(async (producto) => {
-//     const { data } = await supabase.storage
-//         .from('img_productos')
-//         .getPublicUrl(`${producto.id_productos}.jpg`);
-//     return {
-//         ...producto,
-//         imagen: data
-//     };
-// }));
-
-// console.log(productosConImagenes)
 ---
 
     {
     Productos?.map((producto) => (
-        <div class="flex flex-col gap-2">
+        <div class="flex flex-col flex-wrap gap-2">
             <img
                 src={producto.img_producto}
                 alt="Product image"
-                class=" aspect-square rounded-lg object-cover border border-gray-200 w-full ha overflow-hidden "
+                class=" aspect-square rounded-lg object-cover border border-gray-200 w-full overflow-hidden "
             />
             <div class="flex flex-col gap-1.5">
                 <h3 class="font-semibold">{producto.nombre_producto}</h3>
-                <h3 class="font-semibold">{producto.id_marca.nombre_marca}</h3>
-                <span class="text-sm text-gray-500 truncate">{producto.descripcion}</span>
+                <span class="font-semibold">{producto.id_marca.nombre_marca}</span>
                 <p class="font-semibold">${producto.precio}</p>
-                <button class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all bg-black text-white h-9 rounded-md px-3 hover:scale-105 hover:shadow-2xl">
-                    Ver más del producto
-                </button>
+                <FormattUrl url={producto.nombre_producto} class='inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all bg-black text-white h-9 rounded-md px-3 hover:scale-105 hover:shadow-2xl'>Ver más del producto</FormattUrl>
             </div>
         </div>
     ))}
 
+<!-- 
+                    <span class="text-sm text-gray-500 truncate">{producto.descripcion}</span>
+ -->
 <!-- <style>
     .banner2 {
         position: relative;

@@ -1,0 +1,53 @@
+---
+import Section from "./Section.astro"
+---
+<Section>
+	<article class="slider-frame max-w-7xl mx-auto">
+		<ul>
+			<li><img src="https://www.tauretcomputadores.com/images/banners/Banner_202403221344291414623814.banner_principal.webp" alt=""></li>
+			<li><img src="https://www.tauretcomputadores.com/images/banners/Banner_20240321161127619504662.BANNER_PRINCIPAL.webp" alt=""></li>
+			<li><img src="https://www.tauretcomputadores.com/images/banners/Banner_202404111213331705185069.BANNER_PRINCIPAL.webp" alt=""></li>
+			<li><img src="https://www.tauretcomputadores.com/images/banners/Banner_20240401111146422240374.1200x600.webp" alt=""></li>
+		</ul>
+	</article>
+</Section>
+
+<style>
+    .slider-frame {
+	width: auto;
+    height: auto;
+	margin:50px auto 0;
+	overflow: hidden;
+}
+
+.slider-frame ul {
+	display: flex;
+	padding: 0;
+	width: 400%;
+	
+	animation: slide 20s infinite alternate ease-in-out;
+}
+
+.slider-frame li {
+	width: 100%;
+	list-style: none;
+}
+
+.slider-frame img {
+	width: 100%;
+}
+
+@keyframes slide {
+	0% {margin-left: 0;}
+	20% {margin-left: 0;}
+	
+	25% {margin-left: -100%;}
+	45% {margin-left: -100%;}
+	
+	50% {margin-left: -200%;}
+	70% {margin-left: -200%;}
+	
+	75% {margin-left: -300%;}
+	100% {margin-left: -300%;}
+}
+</style>

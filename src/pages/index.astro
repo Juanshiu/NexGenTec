@@ -1,7 +1,8 @@
 ---
+import Carrusel from '@components/Carrusel.astro';
 import Layout from '../layouts/Layout.astro';
+import ProductsHero from '@components/Products_hero.astro';
 import Section from '@components/Section.astro';
-import ProductsHero from '@components/products_hero.astro';
 
 ---
 
@@ -24,20 +25,20 @@ import ProductsHero from '@components/products_hero.astro';
 			</div>
 		</section>
 
-		<section class="categories container grid gap-4 px-4 my-12 md:grid-cols-2 md:gap-8 lg:px-6 xl:grid-cols-4">
+		<Section class="grid gap-4 mt-12 md:grid-cols-2 md:gap-8 xl:grid-cols-4">
 			<a
 			class="flex flex-col items-center p-4 text-center rounded-lg border hover:shadow-md transition-all dark:hover:shadow-md animate-fade-up animate-duration-[1100ms] animate-ease-out animate-delay-200 "
 			href="/laptops">
 				<img src="Laptop.svg" alt="" width="35px">
-				<span class="mt-2 text-sm font-medium">Laptops</span>
+				<span class="mt-2 text-sm font-medium">Portátiles</span>
 			</a>
 
 			<a
 			class="flex flex-col items-center p-4 text-center rounded-lg border hover:shadow-md transition-all dark:hover:shadow-md animate-fade-up animate-duration-[1100ms] animate-ease-out animate-delay-[400ms]"
-			href="./Escritorio.astro"
+			href="/desktops"
 			>
 				<img src="Desktop.svg" alt="" width="35px">
-				<span class="mt-2 text-sm font-medium">Desktops</span>
+				<span class="mt-2 text-sm font-medium">Escritorio</span>
 			</a>
 
 			<a
@@ -45,7 +46,7 @@ import ProductsHero from '@components/products_hero.astro';
 			href="#"
 			>
 				<img src="Components.svg" alt="" width="35px">
-				<span class="mt-2 text-sm font-medium">Components</span>
+				<span class="mt-2 text-sm font-medium">Componentes</span>
 			</a>
 			
 			<a
@@ -53,13 +54,18 @@ import ProductsHero from '@components/products_hero.astro';
 			href="#"
 			>
 				<img src="Accesorios.svg" alt="" width="35px">
-				<span class="mt-2 text-sm font-medium">Accessories</span>
+				<span class="mt-2 text-sm font-medium">Accesorios</span>
 			</a>
-		</section>
+		</Section>
+		
+		<Carrusel/>
 
-		<section class=" container grid gap-6 px-4 py-6 md:grid-cols-2 md:gap-10 lg:px-6 xl:grid-cols-3 ">
-			<ProductsHero/>
-		</section>
+		<Section class=" mt-8">
+			<h1 class=" text-2xl">Lo más vendido</h1>
+			<article class=" grid gap-6 py-6 md:grid-cols-2 md:gap-10 xl:grid-cols-3">
+				<ProductsHero/>
+			</article>
+		</Section>
 
 	</main>
 </Layout>
