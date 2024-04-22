@@ -25,18 +25,21 @@ import Carrito from '@components/icons/Carrito.astro'
           <a href="/register" class="block text-stone-950">Registrarse</a>
         </li>
         <li>
-          <a href="/signin" class="block text-stone-950">Iniciar Sesión</a>
+          <a href="/signin" class="block t  ext-stone-950">Iniciar Sesión</a>
         </li> -->
         <li>
-          <a href="/register"><img src="User.svg" alt="" class=" p-2 rounded-full border border-input bg-background hover:bg-accent transition-colors hover:border-black hover:scale-105"></a>
+          <a href="/register">
+            <img src="User.svg" alt="" class=" p-2 rounded-full border bg-background hover:bg-accent transition-colors hover:border-black hover:scale-105">
+          </a>
         </li>
+
         <li>
-          <button class="p-3 rounded-full border border-input bg-background hover:bg-accent transition-colors hover:border-black hover:scale-105">
-            <Carrito class="size-5"/>
-          </button>
+          <a href="/shoppingcart" id="cart" class=" relative">
+            <Carrito class="size-10 p-2 rounded-full border bg-background hover:bg-accent transition-colors hover:border-black hover:scale-105"></Carrito>
+            <span id="cuenta-carrito" class=" absolute bottom-5 left-8 text-white bg-black rounded-full p-1 text-center inline-block leading-3">0</span>
+          </a>
         </li>
       </ul>
-      
     </div>
 
   </div>
