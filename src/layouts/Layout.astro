@@ -23,7 +23,7 @@ import Footer from "@components/layout/Footer.astro";
     
 		<title>{title}</title>
 	</head>
-	<body class="flex flex-col h-full w-full bg-blue-50/30">
+	<body class={`${className}flex flex-col h-full w-full bg-blue-50/30`}>
 		<Header />
 		<slot />
 		<Footer />
