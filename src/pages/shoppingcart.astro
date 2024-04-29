@@ -1,72 +1,116 @@
 ---
+import { supabase } from '@lib/supabase';
 import Section from "@components/Section.astro";
 import Carrito from "@components/icons/Carrito.astro";
 import Layout from "@layouts/Layout.astro";
+import type Cart from "@interface/cart";
+
+// Obtener los productos del carrito desde la base de datos
+const { data, error } = await supabase
+  .from('Carrito')
+  .select(`id_producto (nombre_producto, precio), cantidad `);
+
+if (error) {
+  console.error('Error al obtener los productos del carrito:', error);
+}
+
+let carritoProductos: Cart[] = data || []
+
+
+const total = carritoProductos.reduce((acc, id_producto) => {
+  return acc + id_producto.id_producto.precio * id_producto.cantidad;
+}, 0);
+
+
+// Función para eliminar un producto del carrito
+async function eliminarProductoCarrito(productoId: number) {
+  const { error } = await supabase
+    .from('Carrito')
+    .delete()
+    .eq('id_producto', productoId);
+
+  if (error) {
+    console.error('Error al eliminar el producto del carrito:', error);
+  } else {
+    // Actualizar la página después de eliminar el producto
+    window.location.reload();
+  }
+}
 ---
+
 <Layout title="NexGenTec">
-  <Section>
-    <article>
-        <h1><Carrito/>Carrito de compra <span>(Descuento: 0%)</span></h1>
-        <hr>
-        <table>
-            <thead>
-                <tr>
+    <Section class=" flex mt-14">
+
+        <article class=" p-4 w-9/12">
+            <h1 class=" flex">
+                <Carrito />Carrito de compra <span>(Descuento: 0%)</span>
+            </h1>
+            <hr />
+            <table>
+                <thead>
+                <tr class=" ">
                     <th>Producto</th>
                     <th>Cantidad</th>
                     <th>Precio</th>
                     <th>Subtotal</th>
                     <th>Acciones</th>
                 </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Producto 1</td>
-                    <td>1</td>
-                    <td>$100.00</td>
-                    <td>$100.00</td>
-                    <td><button>Eliminar</button></td>
-                </tr>
-                <tr>
-                    <td>Producto 2</td>
-                    <td>2</td>
-                    <td>$200.00</td>
-                    <td>$400.00</td>
-                    <td><button>Eliminar</button></td>
-                </tr>
-                <tr>
-                    <td>Producto 3</td>
-                    <td>3</td>
-                    <td>$300.00</td>
-                    <td>$900.00</td>
-                    <td><button>Eliminar</button></td>
-                </tr>
-            </tbody>
-            <tfoot>
+                </thead>
+                <tbody>
+                {
+                    carritoProductos.map((producto) => (
+                    <tr>
+                        <td>{producto.id_producto.nombre_producto}</td>
+                        <td>{producto.cantidad}</td>
+                        <td>${producto.id_producto.precio}</td>
+                        <td>${producto.id_producto.precio * producto.cantidad}</td>
+                        <td>
+                        <button
+                            onclick={() => eliminarProductoCarrito(producto.id_producto.id_producto)}
+                        >
+                            Eliminar
+                        </button>
+                        </td>
+                    </tr>
+                    ))
+                }
+                </tbody>
+                <tfoot>
                 <tr>
                     <td colspan="3">Total</td>
-                    <td>$1400.00</td>
+                    <td>${total}</td>
                     <td><button>Comprar</button></td>
                 </tr>
-            </tfoot>
-        </table>
-    </article>
+                </tfoot>
+            </table>
+        </article>
 
-    <article>
-        <h1><img src="list.svg" alt="">Resumen de la compra</h1>
-        <hr>
-        <span>1 Producto(s) en el Carro de Compras</span>
+        <article class=" w-1/4 p-4 bg-black/5 rounded-lg">
+        <h1><img src="list.svg" alt="" />Resumen de la compra</h1>
+        <hr />
+        <span>{carritoProductos.length} Producto(s) en el Carro de Compras</span>
         <div>
             <span>Total</span>
-            <span>$1400.00</span>
+            <span>${total}</span>
         </div>
         <div>
-            <span><img src="lock.svg" alt="" class=" size-8">Tu información es segura</span>
-            <p>No venderemos ni alquilaremos su información de contacto personal con fines de marketing.</p>
+            <span>
+            <img src="lock.svg" alt="" class="size-8" />Tu información es segura
+            </span>
+            <p>
+            No venderemos ni alquilaremos su información de contacto personal con
+            fines de marketing.
+            </p>
         </div>
         <div>
-            <span><img src="safe.svg" alt="" class=" size-8">Pago seguro</span>
-            <p>Toda la información se cifra y se transmite sin riesgo mediante un protocolo de capa de conexión segura SSL.</p>
+            <span>
+            <img src="safe.svg" alt="" class="size-8" />Pago seguro
+            </span>
+            <p>
+            Toda la información se cifra y se transmite sin riesgo mediante un
+            protocolo de capa de conexión segura SSL.
+            </p>
         </div>
-    </article>
-  </Section>
+        </article>
+    </Section>
 </Layout>

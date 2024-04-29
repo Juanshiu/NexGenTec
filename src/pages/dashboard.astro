@@ -28,6 +28,7 @@ if (error) {
 }
 
 const email = data?.user?.email;
+const name = data?.user?.user_metadata.full_name;
 ---
 <Layout title="panel de control">
     <section class="py-24 px-4 w-full flex flex-col items-center gap-2">
@@ -36,12 +37,13 @@ const email = data?.user?.email;
         >
           {email}
         </p>
-        <p class="max-w-prose text-lg mb-2 dark:text-zinc-100">
-          This is a protected page. You can only see this if you are logged in.
+
+        <p class="max-w-prose text-lg text-black mb-2">
+          Hola {name}, Bienvenido a tu panel de control. 
         </p>
         <a
           href="/api/auth/signout"
-          class="mb-10 bg-zinc-900 dark:bg-zinc-100 text-zinc-100 dark:text-zinc-900 px-3 py-1 rounded-md"
+          class="mb-10 bg-zinc-900 text-zinc-100 px-3 py-1 rounded-md"
           >Sign out</a
         >
       </section>

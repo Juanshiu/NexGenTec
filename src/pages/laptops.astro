@@ -35,15 +35,7 @@ const checkboxes5 = [
 
 let { data, error } = await supabase
     .from('Productos')
-    .select(`
-        id_producto,
-        nombre_producto,
-        id_marca (
-            nombre_marca
-        ),
-        descripcion,
-        precio,
-        img_producto`)
+    .select('*')
     .eq('id_categoria', 1)
 
     if (error) {

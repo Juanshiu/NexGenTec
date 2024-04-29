@@ -1,7 +1,14 @@
 ---
 import Logo from '@components/icons/logo.astro'
 import Carrito from '@components/icons/Carrito.astro'
+import { supabase } from '@lib/supabase'
+import SearchComponent from '@components/layout/Search'
+
+const { data: { user } } = await supabase.auth.getUser()
+const userProfilePicture = user?.user_metadata?.avatar_url || 'User.svg'
+
 ---
+
 <nav class="border-b bg-white ">
 
   <div class=" flex items-center justify-between p-4 max-w-screen-xl mx-auto">
@@ -10,33 +17,20 @@ import Carrito from '@components/icons/Carrito.astro'
       NexGenTec
     </a>
 
-    <label for="" class=" flex">
-      <input id="search" type="search" class=" py-2 px-4 bg-zinc-50 border border-black focus:border-blue-500 rounded-l-md focus:outline-none  focus:bg-white focus:ring-opacity-60">
-      <!-- <DropdownMenu client:load /> -->
-      <button id="search" class=" bg-black text-white px-4 py-2 rounded-e-md">Buscar</button>
-    </label>
+    <SearchComponent client:load/>
 
     <div>
       <ul class=" font-medium flex items-center gap-4">
-        <!-- <li>
-          <a href="/dashboard" class="block text-stone-950">Perfil</a>
-        </li>
         <li>
-          <a href="/register" class="block text-stone-950">Registrarse</a>
-        </li>
-        <li>
-          <a href="/signin" class="block t  ext-stone-950">Iniciar Sesión</a>
-        </li> -->
-        <li>
-          <a href="/register">
-            <img src="User.svg" alt="" class=" p-2 rounded-full border bg-background hover:bg-accent transition-colors hover:border-black hover:scale-105">
+          <a href="/dashboard">
+            <img src={userProfilePicture} alt="" class=" p-2 size-10 rounded-full border bg-background hover:bg-accent transition-colors hover:border-black hover:scale-105">
           </a>
         </li>
 
         <li>
           <a href="/shoppingcart" id="cart" class=" relative">
             <Carrito class="size-10 p-2 rounded-full border bg-background hover:bg-accent transition-colors hover:border-black hover:scale-105"></Carrito>
-            <span id="cuenta-carrito" class=" absolute bottom-5 left-8 text-white bg-black rounded-full p-1 text-center inline-block leading-3">0</span>
+            <span id="cuenta-carrito" class=" absolute bottom-5 left-8 text-white bg-black rounded-full p-1 text-center inline-block leading-3"></span>
           </a>
         </li>
       </ul>
@@ -44,3 +38,20 @@ import Carrito from '@components/icons/Carrito.astro'
 
   </div>
 </nav>
+
+<script is:inline>
+  async function obtenerCantidadCarrito() {
+  const { data, error } = await supabase
+    .from('Carrito')
+    .select('producto_id', { count: 'exact' }); // Contar registros distintos
+
+  if (error) {
+    console.error('Error al obtener la cantidad de productos en el carrito:', error);
+  } else {
+    const cantidad = data ? data.count : 0;
+    document.getElementById('cuenta-carrito').textContent = cantidad.toString();
+  }
+}
+
+  obtenerCantidadCarrito();
+</script>
