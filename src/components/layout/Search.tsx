@@ -52,12 +52,11 @@ const SearchComponent = () => {
 
  return (
     <div>
-      
       <form className="flex">
         <input
           id="search"
           type="search"
-          className="py-2 px-4 bg-zinc-50 border border-black focus:border-blue-500 rounded-l-md focus:outline-none focus:bg-white focus:ring-opacity-60"
+          className="py-2 px-4 bg-zinc-50 border border-black focus:border-blue-500 sm:rounded-l-md rounded-none focus:outline-none focus:bg-white focus:ring-opacity-60"
           placeholder="Buscar productos"
           value={searchTerm}
           onChange={handleSearch}
@@ -66,7 +65,7 @@ const SearchComponent = () => {
         <button
           id="submit"
           type="button"
-          className="bg-black text-white px-4 py-2 rounded-e-md"
+          className="bg-black text-white px-4 py-2 rounded-e-md sm:block hidden"
           onClick={() => searchProducts(searchTerm)}
         >
           Buscar
