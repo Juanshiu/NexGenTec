@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import type Products from "@interface/productos";
 import { createClient } from '@supabase/supabase-js'
-import FormattUrl from "@components/FormattUrl.astro";
 
 // Create a single supabase client for interacting with your database
 const supabase = createClient('https://apizbrhjcalaarjxryea.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFwaXpicmhqY2FsYWFyanhyeWVhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDcxNDk3MTksImV4cCI6MjAyMjcyNTcxOX0._VIV_7_V1D3R0ezrb41Ci3sj5x_Kw40y8pgzJaKFL8U')
@@ -78,7 +77,7 @@ const SearchComponent = () => {
         <div
           className="absolute w-60 h-28 overflow-y-auto bg-white border border-gray-300 rounded-lg shadow-md z-10 mt-2"
         >
-          {searchResults.map((producto, index) => (
+          {searchResults.map((producto) => (
             <a href={`${crearSlug(producto.nombre_producto)}`} className="product-result py-2 flex">
               <img src={producto.img_producto} alt={producto.nombre_producto} className=' size-12' />
               <h3>{producto.nombre_producto}</h3>
