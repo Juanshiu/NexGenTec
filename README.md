@@ -1,16 +1,56 @@
-# Astro Starter Kit: Basics
+# NexGenTec
+![just-the-basics](./public/img/preview.jpg)
 
-```sh
-npm create astro@latest -- --template basics
+## Descripción
+
+NexGenTec es un proyecto pequeño que busca implementar Supabase como base de datos usanndo un framework llamado "Astro". Este con el fin de demostrar el potencial de Astro para crear también sitios webs ecommerce.
+
+
+## Características
+
+- Astro
+- Tailwind
+- React
+- Supabase
+
+### Requisitos
+
+- Tener Instalado Node.js
+
+### Pasos de Instalación
+
+```
+git clone https://github.com/Juanshiu/NexGenTec
+```
+```
+git init
+```
+```
+npm run dev
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## Contribución
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Si estás interesado en contribuir al proyecto, por favor sigue estos pasos:
 
-![just-the-basics](./public/img/preview.jpg)
+1. Fork del repositorio
+2. Crear una nueva rama para tus cambios
+3. Hacer commit de tus cambios
+4. Crear un pull request
+
+## Licencia
+
+Este proyecto está bajo la licencia [nombre de la licencia]. Consulta el archivo `LICENSE` para más detalles.
+
+## Contacto
+
+Si tienes alguna pregunta o sugerencia, no dudes en abrir un issue en este repositorio.
+
+---
+
+Este proyecto está alojado en https://nex-gen-tec.vercel.app/.
+
+
 
 <!-- ## 🚀 Project Structure
 
