@@ -2,26 +2,19 @@
 import { supabase } from '@lib/supabase';
 import type Products from "@interface/productos";
 import Layout from '@layouts/Layout.astro';
-export const prerender = true;
 
+export const prerender = true;
 
 export async function getStaticPaths() {
   const { data } = await supabase
     .from('Productos')
-    .select(`
-        id_producto,
-        nombre_producto,
-        id_marca (
-            nombre_marca
-        ),
-        descripcion,
-        precio,
-        img_producto`)
-    
+    .select('*');
+
   const productos: Products[] = data || [];
+
   function crearSlug(nombre: string) {
     return nombre.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-}
+  }
 
   return productos.map((producto) => ({
     params: { producto: crearSlug(producto.nombre_producto) },
@@ -30,29 +23,55 @@ export async function getStaticPaths() {
 }
 
 const { producto } = Astro.props;
-
 ---
 
-<Layout title={`Comprar ${producto.nombre_producto}`}> 
-
+<Layout title={`Comprar ${producto.nombre_producto}`}>
   <main class="container mx-auto">
-      <section class="flex flex-wrap">
-
-        <div class="w-full md:w-1/2 p-4">
-          <img src={producto.img_producto} alt={producto.nombre_producto} class="w-full" />
-        </div>
-
-        <div class="w-full md:w-1/2 p-4">
-          <h1 class="text-3xl font-bold">{producto.nombre_producto}</h1>
-          <p class="text-lg text-gray-600 overflow-auto">{producto.descripcion}</p>
-          <p class="text-2xl font-bold text-green-500">${producto.precio}</p>
-          <button type="button" id="AggCarro" onClick={() => agregarAlCarro(producto.id_producto)} class=" rounded px-4 py-2 bg-black text-white transition-transform hover:scale-105">AÑADIR AL CARRO</button>
-        </div>
-
-      </section>
+    <section class="flex flex-wrap">
+      <div class="w-full md:w-1/2 p-4">
+        <img src={producto.img_producto} alt={producto.nombre_producto} class="w-full" />
+      </div>
+      <div class="w-full md:w-1/2 p-4">
+        <h1 class="text-3xl font-bold">{producto.nombre_producto}</h1>
+        <p class="text-lg text-gray-600 overflow-auto">{producto.descripcion}</p>
+        <p class="text-2xl font-bold text-green-500">${producto.precio}</p>
+        <button
+          type="button"
+          data-producto-id={producto.id_producto}
+          class="agregar-al-carro rounded px-4 py-2 bg-black text-white transition-transform hover:scale-105"
+          >AÑADIR AL CARRO</button
+        >
+      </div>
+    </section>
   </main>
 </Layout>
 
+<script is:inline>
+  // Encuentra todos los botones con la clase `agregar-al-carro`
+  const botones = document.querySelectorAll('.agregar-al-carro');
 
+  // Maneja los clicks en cada botón
+  botones.forEach((boton) => {
+    boton.addEventListener('click', () => {
+      // Obtiene el ID del producto del atributo `data-producto-id`
+      const productoId = boton.getAttribute('data-producto-id');
 
+      // Llama a la función `agregarAlCarro` con el ID del producto
+      agregarAlCarro(productoId);
+    });
+  });
 
+  async function agregarAlCarro(productoId) {
+  const { data, error } = await supabase
+    .from('Carrito')
+    .insert([{ producto_id: productoId, cantidad: 1 }], { returning: 'minimal' }) // Agregar cantidad
+    .single();
+
+  if (error) {
+    console.error('Error al agregar el producto al carrito:', error);
+  } else {
+    console.log('Producto agregado al carrito:', data);
+    obtenerCantidadCarrito(); // Actualizar el conteo en el carrito
+  }
+}
+</script>

@@ -7,36 +7,21 @@ import Carrito from '@components/icons/Carrito.astro';
 import FormattUrl from '@components/FormattUrl.astro';
 
 const checkboxes = [
-    { text: 'Oficina', value: 'opcion1', id: 'checkbox1' },
-    { text: 'Gaming', value: 'opcion2', id: 'checkbox2' },
+    { text: 'Microfonos', value: 'opcion1', id: 'checkbox1' },
+    { text: 'Mauses', value: 'opcion2', id: 'checkbox2' },
+    { text: 'Alfombrillas', value: 'opcion3', id: 'checkbox3' },
+    { text: 'Teclados', value: 'opcion4', id: 'checkbox4' },
 ];
 const checkboxes2 = [
-    { text: 'Intel', value: 'opcion1', id: 'checkbox1' },
-    { text: 'AMD', value: 'opcion2', id: 'checkbox2' },
-];
-
-const checkboxes3 = [
-    { text: '4GB', value: 'opcion1', id: 'checkbox1' },
-    { text: '8GB', value: 'opcion2', id: 'checkbox2' },
-    { text: '16GB', value: 'opcion3', id: 'checkbox3' },
-];
-
-const checkboxes4 = [
-    { text: '128GB', value: 'opcion1', id: 'checkbox1' },
-    { text: '256GB', value: 'opcion2', id: 'checkbox2' },
-    { text: '512GB', value: 'opcion3', id: 'checkbox3' },
-];
-
-const checkboxes5 = [
-    { text: 'Intel', value: 'opcion1', id: 'checkbox1' },
-    { text: 'Nvidia', value: 'opcion2', id: 'checkbox2' },
-    { text: 'AMD', value: 'opcion3', id: 'checkbox3' },
+    { text: 'Logitech', value: 'opcion5', id: 'checkbox5' },
+    { text: 'Redragon', value: 'opcion6', id: 'checkbox6' },
+    { text: 'Razer', value: 'opcion7', id: 'checkbox7' },
 ];
 
 let { data, error } = await supabase
     .from('Productos')
     .select('*')
-    .eq('id_categoria', 2)
+    .eq('id_categoria', 4)
 
     if (error) {
         console.log(error)
@@ -46,7 +31,7 @@ let Productos: Products[] = data || []
 let numeroDeProductos = Productos.length
 ---
 
-<Layout title='Laptops'>
+<Layout title='Componentes'>
     <main class=" 2xl:max-w-6xl xl:max-w-6xl mx-auto mt-8 ">
 
         <div class=" flex justify-between mb-8 text-lg">
@@ -62,15 +47,9 @@ let numeroDeProductos = Productos.length
                 </div>
                 <hr>
 
-                <Checkboxs title='Por Categoría' checkboxes={checkboxes} />
+                <Checkboxs title='Por Tipo' checkboxes={checkboxes} />
     
-                <Checkboxs title='Por Procesador' checkboxes={checkboxes2} />
-
-                <Checkboxs title='Por Memoria RAM' checkboxes={checkboxes3} />
-
-                <Checkboxs title='Por Almacenamiento' checkboxes={checkboxes4} />
- 
-                <Checkboxs title='Por Tarjeta Gráfica' checkboxes={checkboxes5} />
+                <Checkboxs title='Por Marca' checkboxes={checkboxes2} />
 
             </aside>
 
