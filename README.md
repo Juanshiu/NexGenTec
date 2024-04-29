@@ -3,10 +3,10 @@
 
 ## Descripción
 
-NexGenTec es un proyecto pequeño que busca implementar Supabase como base de datos usanndo un framework llamado "Astro". Este con el fin de demostrar el potencial de Astro para crear también sitios webs ecommerce.
+NexGenTec es un proyecto pequeño que busca implementar Supabase como base de datos usando un framework llamado "Astro". Este con el fin de demostrar el potencial de Astro para crear también sitios webs ecommerce.
 
 
-## Características
+## Características 🚀
 
 - Astro
 - Tailwind
@@ -29,7 +29,7 @@ git init
 npm run dev
 ```
 
-## Contribución
+## Contribución 🤝
 
 Si estás interesado en contribuir al proyecto, por favor sigue estos pasos:
 
@@ -42,7 +42,14 @@ Si estás interesado en contribuir al proyecto, por favor sigue estos pasos:
 
 Este proyecto está bajo la licencia [nombre de la licencia]. Consulta el archivo `LICENSE` para más detalles.
 
-## Contacto
+## Por terminar ✏️
+
+- Página del carrito
+- Lógica del carrito
+- Lógica de los filtros
+- Implementar pasarela de pagos
+
+## Contacto 📬
 
 Si tienes alguna pregunta o sugerencia, no dudes en abrir un issue en este repositorio.
 
