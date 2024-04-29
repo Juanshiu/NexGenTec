@@ -1,9 +1,22 @@
 ---
 import Carrusel from '../components/Carrusel.astro';
 import Layout from '../layouts/Layout.astro';
-import ProductsHero from '../components/Products_hero.astro';
 import Section from '../components/Section.astro';
 
+import { supabase } from '../lib/supabase'
+import type Products from "../interface/productos";
+import FormattUrl from "../components/FormattUrl.astro";
+
+let { data, error } = await supabase
+    .from('Productos')
+    .select('*')
+    .range(0, 8)
+
+    if (error) {
+        console.log(error)
+    }
+
+let Productos: Products[] = data || []
 ---
 
 <Layout title="NexGenTec" description='Bienvenidos a nuestra tienda virtual, aquí podrás encontrar todo tipo de componentes para tu pc y entre otros producto tecnológicos.'>
@@ -63,7 +76,22 @@ import Section from '../components/Section.astro';
 		<Section class=" mt-8">
 			<h1 class=" text-2xl">Lo más vendido</h1>
 			<article class=" grid gap-6 py-6 md:grid-cols-2 md:gap-10 xl:grid-cols-3">
-				<ProductsHero/>
+				{
+					Productos?.map((producto) => (
+						<div class="flex flex-col flex-wrap gap-2">
+							<img
+								src={producto.img_producto}
+								alt="Product image"
+								class=" aspect-square rounded-lg object-cover border border-gray-200 w-full overflow-hidden "
+							/>
+							<div class="flex flex-col gap-1.5">
+								<h3 class="font-semibold">{producto.nombre_producto}</h3>
+								<span class="font-semibold">{producto.id_marca.nombre_marca}</span>
+								<p class="font-semibold">${producto.precio}</p>
+								<FormattUrl url={producto.nombre_producto} class='inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all bg-black text-white h-9 rounded-md px-3 hover:scale-105 hover:shadow-2xl'>Ver más del producto</FormattUrl>
+							</div>
+						</div>
+					))}
 			</article>
 		</Section>
 

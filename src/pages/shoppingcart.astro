@@ -1,5 +1,5 @@
 ---
-import { supabase } from '@lib/supabase';
+import { supabase } from '../lib/supabase';
 import Section from "../components/Section.astro";
 import Carrito from "../components/icons/Carrito.astro";
 import Layout from "../layouts/Layout.astro";
@@ -8,7 +8,7 @@ import type Cart from "../interface/cart";
 // Obtener los productos del carrito desde la base de datos
 const { data, error } = await supabase
   .from('Carrito')
-  .select(`id_producto (nombre_producto, precio), cantidad `);
+  .select('*');
 
 if (error) {
   console.error('Error al obtener los productos del carrito:', error);
@@ -57,7 +57,7 @@ async function eliminarProductoCarrito(productoId: number) {
                 </tr>
                 </thead>
                 <tbody>
-                {
+                <!-- {
                     carritoProductos.map((producto) => (
                     <tr>
                         <td>{producto.id_producto.nombre_producto}</td>
@@ -73,7 +73,7 @@ async function eliminarProductoCarrito(productoId: number) {
                         </td>
                     </tr>
                     ))
-                }
+                } -->
                 </tbody>
                 <tfoot>
                 <tr>
