@@ -1,10 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Checkboxs from '@components/portatiles/checkboxs.astro';
-import { supabase } from "@lib/supabase";
-import type Products from "@interface/productos";
-import Carrito from '@components/icons/Carrito.astro';
-import FormattUrl from '@components/FormattUrl.astro';
+import Checkboxs from '../components/checkboxs.astro';
+import { supabase } from "../lib/supabase";
+import type Products from "../interface/productos";
+import Carrito from '../components/icons/Carrito.astro';
+import FormattUrl from '../components/FormattUrl.astro';
 
 const checkboxes = [
     { text: 'Memoria RAM', value: 'opcion1', id: 'checkbox1' },

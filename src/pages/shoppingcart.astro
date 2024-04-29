@@ -1,9 +1,9 @@
 ---
 import { supabase } from '@lib/supabase';
-import Section from "@components/Section.astro";
-import Carrito from "@components/icons/Carrito.astro";
-import Layout from "@layouts/Layout.astro";
-import type Cart from "@interface/cart";
+import Section from "../components/Section.astro";
+import Carrito from "../components/icons/Carrito.astro";
+import Layout from "../layouts/Layout.astro";
+import type Cart from "../interface/cart";
 
 // Obtener los productos del carrito desde la base de datos
 const { data, error } = await supabase
