@@ -16,6 +16,7 @@ NexGenTec es un proyecto pequeño que busca implementar Supabase como base de da
 ### Requisitos
 
 - Tener Instalado Node.js
+- Proyecto en Supabase
 
 ### Pasos de Instalación
 
