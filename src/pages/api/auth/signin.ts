@@ -8,13 +8,13 @@ export const POST: APIRoute = async ({ request, cookies, redirect }) => {
   const password = formData.get("password")?.toString();
   const provider = formData.get("provider")?.toString();
 
-  const validProviders = ["google", "github"];
-
-  if (provider && validProviders.includes(provider)) {
+  if (provider) {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: provider as Provider,
       options: {
-        redirectTo: "http://localhost:4321/api/auth/callback"
+        redirectTo: import.meta.env.SUPABASE_URL
+          ? "http://localhost:4321/api/auth/callback"
+          : "https://nex-gen-tec.vercel.app/api/auth/callback",
       },
     });
 
@@ -26,7 +26,7 @@ export const POST: APIRoute = async ({ request, cookies, redirect }) => {
   }
 
   if (!email || !password) {
-    return new Response("Correo electrónico y contraseña obligatorios", { status: 400 });
+    return new Response("Email and password are required", { status: 400 });
   }
 
   const { data, error } = await supabase.auth.signInWithPassword({
