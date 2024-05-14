@@ -1,9 +1,7 @@
 ---
 import Logo from '../icons/Logo.astro'
-import Carrito from '../../components/icons/Carrito.astro'
 import { supabase } from '../../lib/supabase'
 import SearchComponent from './Searching.svelte'
-import CartFlyoutToggle from '@components/prueba/CartFlyoutToggle.svelte'
 import Cart from '../Cart/Cart.svelte'
 
 const { data: { user } } = await supabase.auth.getUser()
