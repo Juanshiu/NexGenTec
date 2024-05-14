@@ -1,6 +1,6 @@
 <script lang="ts">
 import type Products from "../../interface/productos";
-import { supabase } from "@lib/supabase";
+import { supabase } from "../../lib/supabase";
 
 let searchTerm = "";
 let searchResults: Products[] = [];
