@@ -10,7 +10,7 @@ NexGenTec es un proyecto pequeño que busca implementar Supabase como base de da
 
 - Astro
 - Tailwind
-- React
+- Svelte
 - Supabase
 
 ### Requisitos
@@ -46,8 +46,7 @@ Este proyecto está bajo la licencia [nombre de la licencia]. Consulta el archiv
 ## Por terminar ✏️
 
 - Página del carrito
-- Lógica del carrito
-- Lógica de los filtros
+- Persistencia de datos del carrito
 - Implementar pasarela de pagos
 
 ## Contacto 📬
