@@ -2,6 +2,7 @@
 import type Products from "../../interface/productos";
 import { supabase } from "../../lib/supabase";
 
+
 let searchTerm = "";
 let searchResults: Products[] = [];
 const DEBOUNCE_DELAY = 400; // 400ms de retraso
