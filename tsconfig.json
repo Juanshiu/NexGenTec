@@ -16,7 +16,5 @@
         "src/interface/*"
       ],
     },
-    "jsx": "react-jsx",
-    "jsxImportSource": "react"
   }
 }
