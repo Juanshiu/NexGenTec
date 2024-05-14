@@ -12,11 +12,10 @@ export const POST: APIRoute = async ({ request, cookies, redirect }) => {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: provider as Provider,
       options: {
-        redirectTo: import.meta.env.SUPABASE_URL
-          ? "http://localhost:4321/api/auth/callback"
-          : "https://nex-gen-tec.vercel.app/api/auth/callback",
+        redirectTo: "http://localhost:4321/api/auth/callback",
       },
     });
+    
 
     if (error) {
       return new Response(error.message, { status: 500 });
