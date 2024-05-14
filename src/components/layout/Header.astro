@@ -1,12 +1,11 @@
 ---
-import Logo from '../../components/icons/logo.astro'
-import Carrito from '../../components/icons/Carrito.astro'
+import Logo from '../icons/logo.astro'
 import { supabase } from '../../lib/supabase'
-import SearchComponent from '../../components/layout/Search'
+import SearchComponent from './Searching.svelte'
+import Cart from '../Cart/Cart.svelte'
 
 const { data: { user } } = await supabase.auth.getUser()
 const userProfilePicture = user?.user_metadata?.avatar_url || 'User.svg'
-
 ---
 
 <nav class="border-b bg-white ">
@@ -28,30 +27,14 @@ const userProfilePicture = user?.user_metadata?.avatar_url || 'User.svg'
         </li>
 
         <li>
-          <a href="/shoppingcart" id="cart" class=" relative">
+          <Cart client:load/>
+          <!-- <a href="/shoppingcart" id="cart" class=" relative">
             <Carrito class="size-10 p-2 rounded-full border bg-background hover:bg-accent transition-colors hover:border-black hover:scale-105"></Carrito>
             <span id="cuenta-carrito" class=" absolute bottom-5 left-8 text-white bg-black rounded-full p-1 text-center inline-block leading-3"></span>
-          </a>
+          </a> -->
         </li>
       </ul>
     </div>
 
   </div>
 </nav>
-
-<script is:inline>
-  async function obtenerCantidadCarrito() {
-  const { data, error } = await supabase
-    .from('Carrito')
-    .select('producto_id', { count: 'exact' }); // Contar registros distintos
-
-  if (error) {
-    console.error('Error al obtener la cantidad de productos en el carrito:', error);
-  } else {
-    const cantidad = data ? data.count : 0;
-    document.getElementById('cuenta-carrito').textContent = cantidad.toString();
-  }
-}
-
-  obtenerCantidadCarrito();
-</script>

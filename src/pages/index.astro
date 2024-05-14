@@ -2,10 +2,10 @@
 import Carrusel from '../components/Carrusel.astro';
 import Layout from '../layouts/Layout.astro';
 import Section from '../components/Section.astro';
-
+import './css/AnimaTextIndex.css'
 import { supabase } from '../lib/supabase'
 import type Products from "../interface/productos";
-import FormattUrl from "../components/FormattUrl.astro";
+import FormaterUrl from "../components/FormaterUrl.svelte";
 
 let { data, error } = await supabase
     .from('Productos')
@@ -41,14 +41,14 @@ let Productos: Products[] = data || []
 		<Section class="grid gap-4 mt-12 md:grid-cols-2 md:gap-8 xl:grid-cols-4">
 			<a
 			class="flex flex-col items-center p-4 text-center rounded-lg border hover:shadow-md transition-all dark:hover:shadow-md animate-fade-up animate-duration-[1100ms] animate-ease-out animate-delay-200 "
-			href="/laptops">
+			href="laptops">
 				<img src="Laptop.svg" alt="" width="35px">
 				<span class="mt-2 text-sm font-medium">Portátiles</span>
 			</a>
 
 			<a
 			class="flex flex-col items-center p-4 text-center rounded-lg border hover:shadow-md transition-all dark:hover:shadow-md animate-fade-up animate-duration-[1100ms] animate-ease-out animate-delay-[400ms]"
-			href="/desktops"
+			href="desktops"
 			>
 				<img src="Desktop.svg" alt="" width="35px">
 				<span class="mt-2 text-sm font-medium">Escritorio</span>
@@ -88,7 +88,7 @@ let Productos: Products[] = data || []
 								<h3 class="font-semibold">{producto.nombre_producto}</h3>
 								<span class="font-semibold">{producto.id_marca.nombre_marca}</span>
 								<p class="font-semibold">${producto.precio}</p>
-								<FormattUrl url={producto.nombre_producto} class='inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all bg-black text-white h-9 rounded-md px-3 hover:scale-105 hover:shadow-2xl'>Ver más del producto</FormattUrl>
+								<FormaterUrl url={producto.nombre_producto} className='inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all bg-black text-white h-9 rounded-md px-3 hover:scale-105 hover:shadow-2xl'>Ver más del producto</FormaterUrl>
 							</div>
 						</div>
 					))}
@@ -97,27 +97,3 @@ let Productos: Products[] = data || []
 
 	</main>
 </Layout>
-
-<style>
-	.animate-charcter {
-		background-image: linear-gradient(
-			-25deg,
-			#fff800 0%,
-			#7c0c9e 29%,
-			#ff1361 67%,
-			#fff800 100%
-		);
-		background-size: 200% auto;
-		color: #fff;
-		text-decoration: transparent;
-		background-clip: text;
-		-webkit-text-fill-color: transparent;
-		animation: textclip 5s ease-in infinite;
-	}
-
-	@keyframes textclip {
-		to {
-			background-position: 200% center;
-		}
-	}
-</style>

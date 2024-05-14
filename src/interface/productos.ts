@@ -11,4 +11,7 @@ export default interface Products {
   id_categoria: {
     nombre_categoria: string;
   }
+  id_tipopc: {
+    tipo_torre: string;
+  }
 }

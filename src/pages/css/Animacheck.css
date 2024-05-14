@@ -1,0 +1,23 @@
+details[open] summary img:nth-child(1) {
+    transform: rotate(180deg);
+    display: none;
+}
+
+details summary img:nth-child(2) {
+    display: none;
+}
+
+details[open] summary img:nth-child(2) {
+    display: block ;
+}
+
+@keyframes details-show {
+from {
+        opacity:0;
+        transform: var(--details-translate, translateY(-0.5em));
+    }
+}
+
+details[open] > *:not(summary) {
+    animation: details-show 150ms ease-in-out;
+}
