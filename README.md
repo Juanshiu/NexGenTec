@@ -29,6 +29,18 @@ git init
 ```
 npm run dev
 ```
+```
+cp .env.example .env
+```
+Tendrás que configurar una cuenta de Supabase y luego agregar todos los detalles a tu archivo .env.
+
+Una vez que haya conectado su aplicación a Supabase. También deberá configurar los proveedores de autenticación: Google Google Github Github    Google [Google](https://cloud.google.com)
+    Github [Github](https://github.com/settings/developers)
+    
+    https://supabase.com/docs/guides/auth/social-login/auth-google
+    https://supabase.com/docs/guides/auth/social-login/auth-github
+
+En tu proyecto en Supabase, importa el archivo SQL en el editor para crear las correspondientes tablas, finalizando puedes implementar los productos a tus gustos dependiendo de las categorías, marcas, etc..
 
 ## Contribución 🤝
 
