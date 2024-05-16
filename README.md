@@ -9,6 +9,7 @@ NexGenTec es un proyecto pequeño que busca implementar Supabase como base de da
 ## Características 🚀
 
 - Astro
+- Typescript
 - Tailwind
 - Svelte
 - Supabase
