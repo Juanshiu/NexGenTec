@@ -34,8 +34,7 @@ cp .env.example .env
 ```
 Tendrás que configurar una cuenta de Supabase y luego agregar todos los detalles a tu archivo .env.
 
-Una vez que haya conectado su aplicación a Supabase. También deberá configurar los proveedores de autenticación: Google Google Github Github    Google [Google](https://cloud.google.com)
-    Github [Github](https://github.com/settings/developers)
+Una vez que haya conectado su aplicación a Supabase. También deberá configurar los proveedores de autenticación: [Google](https://cloud.google.com) y [Github](https://github.com/settings/developers)
     
     https://supabase.com/docs/guides/auth/social-login/auth-google
     https://supabase.com/docs/guides/auth/social-login/auth-github
