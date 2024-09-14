@@ -1,9 +1,11 @@
 import { writable, derived } from 'svelte/store';
-import type Cart  from '../interface/cart';
+import type Cart from '../interface/cart';
 import type Product from '../interface/productos';
+import { getCartFromLocalStorage, saveCartToLocalStorage } from '../utils/persistCart';
 
-// Inicializa el carrito con un valor vacío
-const cartStore = writable<Cart[]>([]);
+// Inicializa el carrito con los datos del localStorage
+const storedCart = getCartFromLocalStorage();
+const cartStore = writable<Cart[]>(storedCart);
 
 // Derivada para obtener el total de productos en el carrito
 export const totalQuantity = derived(cartStore, ($cartStore) =>
@@ -16,25 +18,27 @@ export const addToCart = (product: Product, quantity: number) => {
     const existingItem = currentCart.find((item) => item.id_producto.id_producto === product.id_producto);
 
     if (existingItem) {
-      // Si el producto ya está en el carrito, actualizar la cantidad
       existingItem.cantidad += quantity;
     } else {
-      // Si el producto no está en el carrito, agregarlo
       currentCart.push({
-        id_producto: product, cantidad: quantity,
+        id_producto: product,
+        cantidad: quantity,
         id_carrito: 0
       });
     }
 
+    saveCartToLocalStorage(currentCart);
     return currentCart;
   });
 };
 
 // Función para eliminar un producto del carrito
 export const removeFromCart = (productId: number) => {
-  cartStore.update((currentCart) =>
-    currentCart.filter((item) => item.id_producto.id_producto !== productId)
-  );
+  cartStore.update((currentCart) => {
+    const updatedCart = currentCart.filter((item) => item.id_producto.id_producto !== productId);
+    saveCartToLocalStorage(updatedCart);
+    return updatedCart;
+  });
 };
 
 // Exportar el carrito y las funciones para interactuar con él
