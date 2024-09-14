@@ -2,11 +2,11 @@
     import type Products from "../../interface/productos";
     import "../../pages/css/Animacheck.css";
     import { onMount } from "svelte";
-    import Loader from "./Loader.svelte";
+    import Loader from "../../components/ui/Loader.svelte";
     import { supabase } from "../../lib/supabase";
-    import AddToCartButton from "../Cart/AddToCartButton.svelte";
-    import FormaterUrl from "../FormaterUrl.svelte";
-    import Main from "../CategoryMain.svelte";
+    import AddToCartButton from "../../components/Cart/AddToCartButton.svelte";
+    import FormaterUrl from "../../components/FormaterUrl.svelte";
+    import Main from "../../components/CategoryMain.svelte";
 
     let Productos: Products[] | null = null;
     let marcasSeleccionadas: string[] = [];
@@ -30,14 +30,6 @@
     let numeroDeProductos = 0;
     $: {
         numeroDeProductos = Productos ? Productos.length : 0;
-    }
-
-    function crearSlug(nombre: string) {
-        //Formater para las URL
-        return nombre
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, "-")
-        .replace(/(^-|-$)/g, "");
     }
 
     const marcas = ['Samsung', 'NVIDIA', 'AMD'];
@@ -65,8 +57,8 @@
             <div class=" flex justify-between mb-2">
                 <span>Ordenar y filtrar</span>
                 <button
-                class=" hover:text-blue-500 transition-colors"
-                on:click={() => (marcasSeleccionadas = [])}>Limpiar todo</button
+                    class=" hover:text-blue-500 transition-colors"
+                    on:click={() => (marcasSeleccionadas = [])}>Limpiar todo</button
                 >
             </div>
             <hr />

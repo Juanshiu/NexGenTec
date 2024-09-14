@@ -2,11 +2,11 @@
     import type Products from "../../interface/productos";
     import "../../pages/css/Animacheck.css";
     import { onMount } from "svelte";
-    import Loader from "./Loader.svelte";
+    import Loader from "../../components/ui/Loader.svelte";
     import { supabase } from "../../lib/supabase";
-    import AddToCartButton from "../Cart/AddToCartButton.svelte";
-    import FormaterUrl from "../FormaterUrl.svelte";
-    import Main from "../CategoryMain.svelte";
+    import AddToCartButton from "../../components/Cart/AddToCartButton.svelte";
+    import FormaterUrl from "../../components/FormaterUrl.svelte";
+    import Main from "../../components/CategoryMain.svelte";
 
     let Productos: Products[] | null = null;
     let marcasSeleccionadas: string[] = [];
@@ -15,7 +15,7 @@
         const { data, error } = await supabase
         .from("Productos")
         .select(`*, id_marca(*)`)
-        .eq("id_categoria", 4);
+        .eq("id_categoria", 1);
 
         if (error) {
             console.error("Error al cargar productos", error);
@@ -40,7 +40,7 @@
         .replace(/(^-|-$)/g, "");
     }
 
-    const marcas = ['Redragon', 'Logitech', 'Hyperx'];
+    const marcas = ['Acer', 'Apple', 'Asus'];
 
     function handleChange(event: Event, value: string) {
         const target = event.target as HTMLInputElement;
@@ -110,7 +110,6 @@
                     <FormaterUrl url={producto.nombre_producto} className='flex justify-center bg-black hover:scale-105 transition-transform text-white px-4 py-2 rounded'>Ver más del producto</FormaterUrl>
                     <AddToCartButton {producto}/>
                 </div>
-
             </div>
             {/each}
         {:else}

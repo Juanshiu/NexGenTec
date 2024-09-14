@@ -2,20 +2,20 @@
     import type Products from "../../interface/productos";
     import "../../pages/css/Animacheck.css";
     import { onMount } from "svelte";
-    import Loader from "./Loader.svelte";
+    import Loader from "../../components/ui/Loader.svelte";
     import { supabase } from "../../lib/supabase";
-    import AddToCartButton from "../Cart/AddToCartButton.svelte";
-    import FormaterUrl from "../FormaterUrl.svelte";
-    import Main from "../CategoryMain.svelte";
+    import AddToCartButton from "../../components/Cart/AddToCartButton.svelte";
+    import FormaterUrl from "../../components/FormaterUrl.svelte";
+    import Main from "../../components/CategoryMain.svelte";
 
     let Productos: Products[] | null = null;
-    let tipoPCSeleccionadas: string[] = [];
+    let marcasSeleccionadas: string[] = [];
 
     const fetchData = async () => {
         const { data, error } = await supabase
         .from("Productos")
-        .select(`*, id_tipopc(*)`)
-        .eq("id_categoria", 2);
+        .select(`*, id_marca(*)`)
+        .eq("id_categoria", 4);
 
         if (error) {
             console.error("Error al cargar productos", error);
@@ -40,14 +40,14 @@
         .replace(/(^-|-$)/g, "");
     }
 
-    const TiposTorres = ['Gaming', 'Profesional'];
+    const marcas = ['Redragon', 'Logitech', 'Hyperx'];
 
     function handleChange(event: Event, value: string) {
         const target = event.target as HTMLInputElement;
-            const tipoPCSeleccionada = target.checked
-                ? [...tipoPCSeleccionadas, value]
-                : tipoPCSeleccionadas.filter(TiposTorres => TiposTorres !== value);
-                tipoPCSeleccionadas = tipoPCSeleccionada;
+            const marcaSeleccionada = target.checked
+                ? [...marcasSeleccionadas, value]
+                : marcasSeleccionadas.filter(marca => marca !== value);
+        marcasSeleccionadas = marcaSeleccionada;
     }
 </script>
 
@@ -66,7 +66,7 @@
                 <span>Ordenar y filtrar</span>
                 <button
                 class=" hover:text-blue-500 transition-colors"
-                on:click={() => (tipoPCSeleccionadas = [])}>Limpiar todo</button
+                on:click={() => (marcasSeleccionadas = [])}>Limpiar todo</button
                 >
             </div>
             <hr />
@@ -74,21 +74,21 @@
             <div class="py-2">
                 <details>
                     <summary class="flex justify-between">
-                        Por Tipos
+                        Por marca
                         <img src="more.svg" width="20px" alt="" />
                         <img src="less.svg" width="20px" alt="" />
                     </summary>
                     <div class=" flex flex-col">
-                        {#each TiposTorres as TipoPC}
+                        {#each marcas as marca}
                         <label>
                             <input
                                 type="checkbox"
-                                name="TiposTorres"
-                                value={TiposTorres}
-                                checked={tipoPCSeleccionadas.includes(TipoPC)}
-                                on:change={(event) => handleChange(event, TipoPC)}
+                                name="marca"
+                                value={marca}
+                                checked={marcasSeleccionadas.includes(marca)}
+                                on:change={(event) => handleChange(event, marca)}
                             />
-                            <span>{TipoPC}</span>
+                            <span>{marca}</span>
                         </label>
                         {/each}
                     </div>
@@ -99,7 +99,7 @@
 
         <article class=" w-full sm:w-4/6 grid grid-cols-3 gap-2">
         {#if Productos}
-            {#each Productos.filter((producto) => tipoPCSeleccionadas.length === 0 || tipoPCSeleccionadas.includes(producto.id_tipopc.tipo_torre)) as producto}
+            {#each Productos.filter((producto) => marcasSeleccionadas.length === 0 || marcasSeleccionadas.includes(producto.id_marca.nombre_marca)) as producto}
 
             <div class=" border border-gray-200 p-4">
                 <img src={producto.img_producto} alt="" class=" w-full object-cover"/>
@@ -110,6 +110,7 @@
                     <FormaterUrl url={producto.nombre_producto} className='flex justify-center bg-black hover:scale-105 transition-transform text-white px-4 py-2 rounded'>Ver más del producto</FormaterUrl>
                     <AddToCartButton {producto}/>
                 </div>
+
             </div>
             {/each}
         {:else}
