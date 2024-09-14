@@ -1,9 +1,138 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import DesktopPage from '../components/ui/DesktopPage.svelte';
+import "./css/Animacheck.css";
+import { supabase } from "../lib/supabase";
+import type Products from "../interface/productos";
+import FormattUrl from '../components/FormaterUrl.svelte';
+import AddToCartButton from '@components/Cart/AddToCartButton.svelte';
+import Loader from '@components/ui/Loader.svelte';
 
+let { data, error } = await supabase
+    .from('Productos')
+    .select(`*, id_tipopc(*)`)
+    .eq('id_categoria', 2)
+
+    if (error) {
+        console.log(error)
+    }
+
+let Productos: Products[] = data || []
+let numeroDeProductos = Productos ? Productos.length : 0;
+let marcasSeleccionadas: string[] = [];
+
+const marcas = ['Gaming', 'Profesional'];
 ---
 
-<Layout title='Laptops'>
-    <DesktopPage client:load/>
+<Layout title='Componentes'>
+    <main class=" 2xl:max-w-6xl xl:max-w-6xl mx-auto mt-8">
+
+        <div class="flex justify-between mb-8 text-lg">
+            <span id="producto-count">Filtrar resultados: {numeroDeProductos} Producto(s)</span>
+            <span class="text-right">Ordenar Por: 
+                <select name="" id="" class="border border-black rounded">
+                    <option value="">Recomendados</option>
+                </select>
+            </span>
+        </div>
+    
+        <section class="flex sm:flex-row flex-col gap-12 text-xl">
+            <aside class="w-full sm:w-1/3">
+                <div class="flex justify-between mb-2">
+                    <span>Ordenar y filtrar</span>
+                    <button
+                        id="limpiar-todo"
+                        class="hover:text-blue-500 transition-colors"
+                    >Limpiar todo</button>
+                </div>
+                <hr />
+    
+                <div class="py-2">
+                    <details>
+                        <summary class="flex justify-between cursor-pointer">
+                            Por marca
+                            <img src="more.svg" width="20px" alt="" />
+                            <img src="less.svg" width="20px" alt="" />
+                        </summary>
+                        <div class="flex flex-col">
+                            {marcas.map((marca) => (
+                                <label class=" cursor-pointer">
+                                    <input
+                                        type="checkbox"
+                                        name="marca"
+                                        value={marca}
+                                        data-marca={marca}
+                                        checked={marcasSeleccionadas.includes(marca)}
+                                    />
+                                    <span>{marca}</span>
+                                </label>
+                            ))}
+                        </div>
+                    </details>
+                </div>
+                <hr />
+            </aside>
+    
+            <article id="productos-container" class="w-full sm:w-4/6 grid grid-cols-3 gap-2">
+                {Productos ? (
+                    Productos.filter((producto) => marcasSeleccionadas.length === 0 || marcasSeleccionadas.includes(producto.id_tipopc.tipo_torre)).map((producto) => (
+                        <div class="border border-gray-200 p-4" data-marca={producto.id_tipopc.tipo_torre}>
+                            <img src={producto.img_producto} alt="" class="w-full object-cover"/>
+                            <h3 class="text-base sm:text-lg font-semibold mt-2">{producto.nombre_producto}</h3>
+                            <p class="text-sm text-gray-500 truncate">{producto.descripcion}</p>
+                            <span class="font-semibold text-base sm:text-lg">${producto.precio}</span>
+                            <div class="flex flex-col justify-between mt-2 gap-2 text-sm">
+                                <FormattUrl url={producto.nombre_producto} className='flex justify-center bg-black hover:scale-105 transition-transform text-white px-4 py-2 rounded'>Ver más del producto</FormattUrl>
+                                <AddToCartButton client:load producto={producto}/>
+                            </div>
+                        </div>
+                    ))
+                ) : (
+                    <Loader />
+                )}
+            </article>
+        </section>
+        
+    </main>
 </Layout>
+
+<script type="module">
+    let marcasSeleccionadas = [];
+    const productos = Array.from(document.querySelectorAll('#productos-container > div'));
+    const productoCountElement = document.getElementById('producto-count');
+
+    function actualizarProductos() {
+        let productosVisibles = 0;
+        productos.forEach(producto => {
+            const marcaProducto = producto.dataset.marca;
+            if (marcasSeleccionadas.length === 0 || marcasSeleccionadas.includes(marcaProducto)) {
+                producto.style.display = '';
+                productosVisibles++;
+            } else {
+                producto.style.display = 'none';
+            }
+        });
+        productoCountElement.textContent = `Filtrar resultados: ${productosVisibles} Producto(s)`;
+    }
+
+    // Manejar cambios en los checkboxes
+    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+        checkbox.addEventListener('change', (event) => {
+            const marca = event.target.dataset.marca;
+            if (event.target.checked) {
+                marcasSeleccionadas.push(marca);
+            } else {
+                marcasSeleccionadas = marcasSeleccionadas.filter(marca => marca !== marca);
+            }
+            actualizarProductos();
+        });
+    });
+
+    // Manejar el botón "Limpiar todo"
+    document.getElementById('limpiar-todo').addEventListener('click', () => {
+        marcasSeleccionadas = [];
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.checked = false;
+        });
+        actualizarProductos();
+    });
+</script>
