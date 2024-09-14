@@ -2,7 +2,6 @@
     import type Products from "../../interface/productos";
     import "../../pages/css/Animacheck.css";
     import { onMount } from "svelte";
-    import Loader from "../../components/ui/Loader.svelte";
     import { supabase } from "../../lib/supabase";
     import AddToCartButton from "../../components/Cart/AddToCartButton.svelte";
     import FormaterUrl from "../../components/FormaterUrl.svelte";
@@ -105,8 +104,8 @@
 
             </div>
             {/each}
-        {:else}
-            <Loader />
+        <!-- {:else}
+            <Loader /> -->
         {/if}
         </article>
     </section>
