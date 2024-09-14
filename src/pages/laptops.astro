@@ -82,7 +82,7 @@ const marcas = ['Acer', 'Apple', 'Asus'];
                             <span class="font-semibold text-base sm:text-lg">${producto.precio}</span>
                             <div class="flex flex-col justify-between mt-2 gap-2 text-sm">
                                 <FormattUrl url={producto.nombre_producto} className='flex justify-center bg-black hover:scale-105 transition-transform text-white px-4 py-2 rounded'>Ver más del producto</FormattUrl>
-                                <AddToCartButton client:load producto={producto}/>
+                                <AddToCartButton client:load {producto}/>
                             </div>
                         </div>
                     ))
