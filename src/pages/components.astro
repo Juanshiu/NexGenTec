@@ -1,13 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import "./css/Animacheck.css";
-import Checkboxs from '../components/checkboxs.astro';
 import { supabase } from "../lib/supabase";
 import type Products from "../interface/productos";
-import Carrito from '../components/icons/Carrito.astro';
 import FormattUrl from '../components/FormaterUrl.svelte';
 import AddToCartButton from '@components/Cart/AddToCartButton.svelte';
-import Loader from '@components/ui/Loader.svelte';
+import Loader from '@components/ui/Loader.astro';
 
 let { data, error } = await supabase
     .from('Productos')

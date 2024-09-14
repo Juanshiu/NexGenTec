@@ -5,7 +5,7 @@ import { supabase } from "../lib/supabase";
 import type Products from "../interface/productos";
 import FormattUrl from '../components/FormaterUrl.svelte';
 import AddToCartButton from '@components/Cart/AddToCartButton.svelte';
-import Loader from '@components/ui/Loader.svelte';
+import Loader from '@components/ui/Loader.astro';
 
 let { data, error } = await supabase
     .from('Productos')
