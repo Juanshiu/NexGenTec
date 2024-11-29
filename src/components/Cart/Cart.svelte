@@ -19,12 +19,28 @@
 
     onDestroy(unsubscribe);
 
+    function clickOutside(node: HTMLElement) {
+        const handleClick = (event: MouseEvent) => {
+            if (node && !node.contains(event.target as Node) && isOpen) {
+                isOpen = false;
+            }
+        };
+
+        document.addEventListener('click', handleClick, true);
+
+        return {
+            destroy() {
+                document.removeEventListener('click', handleClick, true);
+            }
+        };
+    }
+
     function toggleCart() {
         isOpen = !isOpen;
     }
 </script>
 
-<div class="relative inline-block text-left">
+<div class="relative inline-block text-left" use:clickOutside>
     <div>
         <button 
             type="button" 
