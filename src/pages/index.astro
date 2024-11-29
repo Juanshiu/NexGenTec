@@ -5,7 +5,7 @@ import Section from '../components/Section.astro';
 import './css/AnimaTextIndex.css'
 import { supabase } from '../lib/supabase'
 import type Products from "../interface/productos";
-import FormaterUrl from "../components/FormaterUrl.svelte";
+import FormatedUrlStyle from '../components/FormatedUrlStyle.astro';
 
 let { data, error } = await supabase
     .from('Productos')
@@ -88,7 +88,7 @@ let Productos: Products[] = data || []
 								<h3 class="font-semibold">{producto.nombre_producto}</h3>
 								<span class="font-semibold">{producto.id_marca.nombre_marca}</span>
 								<p class="font-semibold">${producto.precio}</p>
-								<FormaterUrl url={producto.nombre_producto} className='inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all bg-black text-white h-9 rounded-md px-3 hover:scale-105 hover:shadow-2xl'>Ver más del producto</FormaterUrl>
+								<FormatedUrlStyle url={producto.nombre_producto} class='inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all bg-black text-white h-9 rounded-md px-3 hover:scale-105 hover:shadow-2xl'>Ver más del producto</FormatedUrlStyle>
 							</div>
 						</div>
 					))}

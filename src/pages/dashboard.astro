@@ -28,7 +28,7 @@ if (error) {
 }
 
 const email = data?.user?.email;
-const name = data?.user?.user_metadata.full_name;
+const name = data?.user?.user_metadata?.full_name || "Usuario";
 ---
 <Layout title="panel de control">
     <section class="py-24 px-4 w-full flex flex-col items-center gap-2">

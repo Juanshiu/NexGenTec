@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import "./css/Animacheck.css";
 import { supabase } from "../lib/supabase";
 import type Products from "../interface/productos";
-import FormattUrl from '../components/FormaterUrl.svelte';
+import FormatedUrlStyle from '../components/FormatedUrlStyle.astro';
 import AddToCartButton from '../components/Cart/AddToCartButton.svelte';
 import Loader from '../components/ui/Loader.astro';
 
@@ -81,7 +81,7 @@ const marcas = ['Redragon', 'Logitech', 'Hyperx'];
                             <p class="text-sm text-gray-500 truncate">{producto.descripcion}</p>
                             <span class="font-semibold text-base sm:text-lg">${producto.precio}</span>
                             <div class="flex flex-col justify-between mt-2 gap-2 text-sm">
-                                <FormattUrl url={producto.nombre_producto} className='flex justify-center bg-black hover:scale-105 transition-transform text-white px-4 py-2 rounded'>Ver más del producto</FormattUrl>
+                                <FormatedUrlStyle url={producto.nombre_producto} class='flex justify-center bg-black hover:scale-105 transition-transform text-white px-4 py-2 rounded'>Ver más del producto</FormatedUrlStyle>
                                 <AddToCartButton client:load {producto}/>
                             </div>
                         </div>

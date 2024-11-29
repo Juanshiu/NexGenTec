@@ -1,0 +1,17 @@
+---
+interface Props {
+    url: string;
+    class?: string;
+}
+
+const { url, class: className } = Astro.props;
+function crearSlug(nombre: string) {
+    return nombre
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)/g, "");
+}
+---
+<a href={crearSlug(url)} class={className}>
+    <slot />
+</a>
