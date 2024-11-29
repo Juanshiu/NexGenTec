@@ -58,7 +58,6 @@ Este proyecto está bajo la licencia [nombre de la licencia]. Consulta el archiv
 ## Por terminar ✏️
 
 - Página del carrito
-- Persistencia de datos del carrito
 - Implementar pasarela de pagos
 
 ## Contacto 📬
