@@ -2,7 +2,6 @@
 import type Products from "../../interface/productos";
 import { supabase } from "../../lib/supabase";
 
-
 let searchTerm = "";
 let searchResults: Products[] = [];
 const DEBOUNCE_DELAY = 400; // 400ms de retraso
@@ -34,38 +33,55 @@ const handleSearch = (event: Event) => {
     searchTerm = term;
 
     if (timeout) {
-    clearTimeout(timeout);
+        clearTimeout(timeout);
     }
 
     timeout = setTimeout(() => {
-    searchProducts(term);
+        searchProducts(term);
     }, DEBOUNCE_DELAY);
 };
 
+// Función para manejar el envío del formulario
+const handleSubmit = (event: Event) => {
+    event.preventDefault();
+    if (searchTerm.trim()) {
+        window.location.href = `/search?q=${encodeURIComponent(searchTerm)}`;
+    }
+};
+
+// Función para manejar la tecla Enter
+const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === 'Enter') {
+        window.location.href = '/search';
+    }
+};
+
 function crearSlug(nombre: string) {
-    //Formater para las URL
     return nombre
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)/g, "");
 }
 </script>
 
 <div>
-<form class="flex">
+<form 
+    class="flex"
+    on:submit={handleSubmit}
+>
     <input
         id="search"
         type="search"
-        class="py-2 px-4 bg-zinc-50 border border-black focus:border-blue-500 sm:rounded-l-md rounded-none focus:outline-none focus:bg-white focus:ring-opacity-60"
         placeholder="Buscar productos"
         bind:value={searchTerm}
         on:input={handleSearch}
+        on:keydown={handleKeyDown}
+        class="py-2 px-4 bg-zinc-50 border border-black focus:border-blue-500 sm:rounded-l-md rounded-none focus:outline-none focus:bg-white focus:ring-opacity-60"
     />
     <button
         id="submit"
-        type="button"
+        type="submit"
         class="bg-black text-white px-4 py-2 rounded-e-md sm:block hidden"
-        on:click={() => searchProducts(searchTerm)}
     >
     Buscar
     </button>

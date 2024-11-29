@@ -1,0 +1,73 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { supabase } from '../lib/supabase';
+import type Products from '../interface/productos';
+import FormatedUrl from '../components/FormatedUrl.astro';
+
+// Obtener el parámetro de búsqueda
+const q = Astro.url.searchParams.get('q');
+let products: Products[] = [];
+let error = null;
+
+if (q) {
+    try {
+        const { data, error: supabaseError } = await supabase
+            .from("Productos")
+            .select("*")
+            .ilike("nombre_producto", `%${q}%`);
+
+        if (supabaseError) throw supabaseError;
+        products = data || [];
+    } catch (e) {
+        error = e;
+        console.error("Error al buscar productos:", e);
+    }
+}
+---
+
+<Layout title={`Búsqueda: ${q || ''} - NexGenTec`}>
+    <main class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-6">
+            {q ? `Resultados para "${q}"` : 'Búsqueda'}
+        </h1>
+
+        {error && (
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                Ocurrió un error al buscar productos. Por favor, intenta de nuevo.
+            </div>
+        )}
+
+        {!error && products.length === 0 && q && (
+            <div class="text-gray-600">
+                No se encontraron productos que coincidan con tu búsqueda.
+            </div>
+        )}
+
+        {products.length > 0 && (
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {products.map((product) => (
+                    <FormatedUrl url={product.nombre_producto} class="block bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                        <div class="aspect-w-16 aspect-h-9">
+                            <img
+                                src={product.img_producto}
+                                alt={product.nombre_producto}
+                                class="object-cover w-full h-48"
+                            />
+                        </div>
+                        <div class="p-4">
+                            <h2 class="text-lg font-semibold text-gray-800 mb-2">
+                                {product.nombre_producto}
+                            </h2>
+                            <p class="text-gray-600 text-sm mb-2 truncate">
+                                {product.descripcion}
+                            </p>
+                            <div class="text-xl font-bold text-blue-600">
+                                ${product.precio}
+                            </div>
+                        </div>
+                    </FormatedUrl>
+                ))}
+            </div>
+        )}
+    </main>
+</Layout>
